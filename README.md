@@ -17,3 +17,7 @@
 - `go run github.com/99designs/gqlgen init` Inicia um template GraphQL
 - `go run server.go` Sobe um servidor de Playground do GraphQL
 - `go run github.com/99designs/gqlgen generate` Cria novos modelos baseados nos `schema` (.graphqls)
+
+#### Makefile
+- `build` Cria o build do projeto
+- `run` Builda e sobe a API

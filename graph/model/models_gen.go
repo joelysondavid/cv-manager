@@ -2,12 +2,25 @@
 
 package model
 
+type CreatePersonInput struct {
+	Name   string `json:"name"`
+	IsMale bool   `json:"isMale"`
+	Age    int    `json:"age"`
+}
+
 type Mutation struct {
 }
 
 type NewTodo struct {
 	Text   string `json:"text"`
 	UserID string `json:"userId"`
+}
+
+type Person struct {
+	ID     string `json:"id"`
+	Name   string `json:"name"`
+	Age    int    `json:"age"`
+	IsMale bool   `json:"isMale"`
 }
 
 type Query struct {

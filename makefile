@@ -3,8 +3,8 @@ GO = go
 PROJECT_DIR = $(shell pwd)
 GQLGEN = github.com/99designs/gqlgen
 
-# Enviroment
-PORT = 8080
+# Environment
+PORT = 9090
 
 # Commands
 

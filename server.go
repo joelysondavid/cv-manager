@@ -3,10 +3,10 @@ package main
 import (
 	"log"
 	"net/http"
-	"os"
 
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
+	"github.com/joelysondavid/cv-manager/config"
 	"github.com/joelysondavid/cv-manager/generated"
 	"github.com/joelysondavid/cv-manager/resolvers"
 
@@ -17,9 +17,10 @@ import (
 const defaultPort = "8080"
 
 func main() {
-	port := os.Getenv("PORT")
+	env := config.GetEnv()
+	port := env.Port
 	if port == "" {
-		port = defaultPort
+		port = config.DEFAULT_PORT
 	}
 
 	router := chi.NewRouter()

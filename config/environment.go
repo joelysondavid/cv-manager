@@ -21,6 +21,8 @@ type EnvVar struct {
 
 type Environment struct {
 	Port string `env:"PORT"`
+	DBUrl string `env:"DB_URL,required"`
+	DBName string `env:"DB_NAME,required"`
 }
 
 func GetEnv() *Environment {

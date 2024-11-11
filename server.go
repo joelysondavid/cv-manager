@@ -7,6 +7,7 @@ import (
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/joelysondavid/cv-manager/config"
+	"github.com/joelysondavid/cv-manager/db"
 	"github.com/joelysondavid/cv-manager/generated"
 	"github.com/joelysondavid/cv-manager/resolvers"
 
@@ -23,15 +24,19 @@ func main() {
 		port = config.DEFAULT_PORT
 	}
 
-	router := chi.NewRouter()
+	db, err := db.New(env.DBName)
+	if err != nil {
+		log.Fatal(err)
+	}
 
+	router := chi.NewRouter()
 	router.Use(
 		cors.Handler(cors.Options{
 			AllowedOrigins: []string{"*"},
 			AllowedMethods: []string{http.MethodGet, http.MethodPost, http.MethodOptions},
 		}),
 	)
-	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &resolvers.Resolver{}}))
+	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &resolvers.Resolver{DB: db}}))
 
 	router.Handle("/", playground.Handler("GraphQL playground", "/query"))
 	router.Handle("/query", srv)
